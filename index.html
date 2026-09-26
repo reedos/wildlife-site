@@ -10,8 +10,8 @@
 <link rel="preload" as="image" href="img/5c0bc538a364b045ef16-1600.jpg" imagesrcset="img/5c0bc538a364b045ef16-1600.jpg 1600w, img/46c23fde944706015c69-2400.jpg 2400w, img/67c8705a99b85a472e85-3840.jpg 3840w" imagesizes="(max-width: 600px) max(100vw, 1110.69px, 150.09svh), max(100vw, clamp(1140.71px, 150.09svh, 2161.35px))" fetchpriority="high">
 <link rel="icon" type="image/svg+xml" href="static/favicon.svg">
 <link rel="preload" href="static/fonts/barlow-condensed-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="static/styles.css?v=10230bff7d28">
-<script src="static/lightbox.js?v=67725e091822" defer></script>
+<link rel="stylesheet" href="static/styles.css?v=583e5bf66b6c">
+<script src="static/lightbox.js?v=6b31a778e4bc" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -41,7 +41,8 @@
   </nav><div class="menu-bottom eyebrow">REED'S WILDLIFE PHOTOGRAPHY</div>
 </dialog>
 <dialog id="lightbox" aria-labelledby="lightbox-caption">
-  <div class="lightbox-toolbar"><span class="eyebrow">FULL FRAME</span><button type="button" class="lightbox-close" aria-label="Close photograph">CLOSE <span aria-hidden="true">×</span></button></div>
+  <div class="lightbox-toolbar"><span class="eyebrow">FULL FRAME</span><div class="lightbox-tools"><button type="button" class="lightbox-info" aria-expanded="false" aria-controls="lightbox-details">DETAILS</button><button type="button" class="lightbox-close" aria-label="Close photograph">CLOSE <span aria-hidden="true">×</span></button></div></div>
+  <aside id="lightbox-details" aria-labelledby="lightbox-details-title" tabindex="0" hidden><h2 id="lightbox-details-title">Photo details</h2><div class="lightbox-detail-content"></div></aside>
   <button class="lightbox-prev" type="button" aria-label="Previous photograph"><span class="chevron chevron-left" aria-hidden="true"></span></button>
   <figure><img alt="" width="1600" height="1066" sizes="100vw"><figcaption id="lightbox-caption"></figcaption></figure>
   <button class="lightbox-next" type="button" aria-label="Next photograph"><span class="chevron chevron-right" aria-hidden="true"></span></button><span class="lightbox-count eyebrow" aria-live="polite"></span>

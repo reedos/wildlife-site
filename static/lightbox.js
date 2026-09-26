@@ -39,6 +39,21 @@
   });
   menu.querySelector('.menu-close').addEventListener('click', function () { menu.close(); });
   var img = box.querySelector('img');
+  var detailsPanel = box.querySelector('#lightbox-details');
+  var detailsButton = box.querySelector('.lightbox-info');
+  function toggleDetails(opened) {
+    detailsPanel.hidden = !opened;
+    detailsButton.setAttribute('aria-expanded', String(opened));
+    detailsButton.textContent = opened ? 'PHOTO' : 'DETAILS';
+    box.classList.toggle('details-open', opened);
+  }
+  detailsButton.addEventListener('click', function () { toggleDetails(detailsPanel.hidden); });
+  box.addEventListener('close', function () { toggleDetails(false); });
+  box.addEventListener('cancel', function (event) {
+    if (!detailsPanel.hidden) {
+      event.preventDefault(); toggleDetails(false); detailsButton.focus();
+    }
+  });
   function sizePhoto() {
     var bounds = img.getBoundingClientRect();
     var ratio = Number(img.getAttribute('width')) / Number(img.getAttribute('height'));
@@ -54,6 +69,10 @@
     img.width = thumb.getAttribute('width');
     img.height = thumb.getAttribute('height');
     box.querySelector('figcaption').textContent = link.dataset.caption || img.alt;
+    var metadata = link.closest('.post-block').querySelector('.photo-detail-grid');
+    box.querySelector('.lightbox-detail-content').replaceChildren();
+    if (metadata) box.querySelector('.lightbox-detail-content').appendChild(metadata.cloneNode(true));
+    detailsButton.hidden = !metadata;
     sizePhoto();
     img.srcset = thumb.srcset;
     img.src = link.dataset.full;

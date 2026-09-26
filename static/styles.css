@@ -10,8 +10,8 @@ button,a{-webkit-tap-highlight-color:transparent}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;cursor:pointer}
 button:disabled{cursor:default}
-button[hidden]{display:none!important}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:7px}
+[hidden]{display:none!important}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:7px}
 button{border:0;background:transparent}
 a:hover{color:var(--accent)}
 .wrap{width:100%;max-width:1600px;margin:0 auto;padding:0 var(--pad)}
@@ -109,6 +109,16 @@ main{min-height:70vh}
 .post-meta{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;border-bottom:1px solid var(--border);padding:18px 0;color:var(--text-dim)}
 .photo-place{letter-spacing:.04em}
 .post-meta:after{content:"FULL FRAME"}
+.photo-details{border-bottom:1px solid var(--border);margin-top:-13px}
+.photo-details summary{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:56px;cursor:pointer;font-size:13px;font-weight:600;list-style:none}
+.photo-details summary::-webkit-details-marker{display:none}
+.details-indicator{width:9px;height:9px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:rotate(45deg);margin-right:5px}
+.photo-details[open] .details-indicator{transform:rotate(225deg)}
+.photo-detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 32px;margin:8px 0 30px}
+.photo-detail-grid>div{min-width:0}
+.photo-detail-grid dt{font:10px/1.5 ui-monospace,Consolas,monospace;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);margin-bottom:7px}
+.photo-detail-grid dd{margin:0;font-size:15px;overflow-wrap:anywhere}
+.photo-detail-grid [data-field=scientific] dd{font-style:italic}
 .section-title{font:12px/1.5 ui-monospace,Consolas,monospace;letter-spacing:.16em;color:var(--text-dim);margin:28px 0}
 .species-note{white-space:pre-wrap;max-width:720px;border-left:1px solid var(--accent);padding-left:24px;color:var(--text-dim);margin-bottom:32px}
 .region-section{display:grid;grid-template-columns:1fr 1.5fr;gap:60px;border-top:1px solid var(--border);padding-top:55px;margin-top:70px;align-items:start}
@@ -167,6 +177,14 @@ dialog:not([open]){display:none!important}
 #site-menu[open] .overlay-nav>a:nth-child(4){animation-delay:.15s}
 @keyframes menu-reveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 #lightbox{--accent:#e6ba82;inset:0;width:100%;height:100svh;background:#090d09;color:#f4f3ed;padding:90px 80px 65px;overflow:hidden}
+.lightbox-tools{display:flex;align-items:center;gap:30px}
+.lightbox-info{font:12px/1.5 ui-monospace,Consolas,monospace;letter-spacing:.13em;min-height:44px;padding:0 8px}
+#lightbox-details{--text-dim:#b6bdb4;position:absolute;z-index:2;top:90px;bottom:70px;right:80px;width:360px;max-width:calc(100% - 160px);padding:28px;background:#191d19;border:1px solid #363d34;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
+#lightbox-details h2{font-size:34px;margin:0 0 28px}
+#lightbox-details .photo-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 20px;margin-bottom:0}
+#lightbox-details .photo-detail-grid dd{font-size:14px}
+#lightbox-details .photo-detail-grid>div:is([data-field=species],[data-field=scientific],[data-field=location],[data-field=camera],[data-field=lens]){grid-column:1/-1}
+#lightbox.details-open figure{opacity:.25}
 .lightbox-toolbar{position:absolute;top:24px;left:var(--pad);right:var(--pad);display:flex;align-items:center;justify-content:space-between}
 #lightbox figure{height:100%;margin:0;display:grid;grid-template-rows:minmax(0,1fr) auto;gap:20px}
 #lightbox img{width:100%;height:100%;min-height:0;object-fit:contain}
@@ -228,6 +246,8 @@ main>.wrap:not(.page-shell):not(#collection){padding-top:160px;padding-bottom:60
 .species-heading h1{font-size:70px;overflow-wrap:anywhere}.species-heading .scientific-name{font-size:14px}
 .species-summary{display:block;padding:24px 0}.species-summary .readout{justify-content:start;gap:26px}.species-summary .readout>div{flex:none}.species-summary>.line-link{margin-top:24px}
 .post-block{margin-bottom:35px}.post-block .caption{font-size:14px}.post-photo img{max-height:80svh}.post-meta{font-size:10px}
+.photo-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 18px}.photo-detail-grid dd{font-size:14px}
+.photo-detail-grid>div:is([data-field=location],[data-field=lens]){grid-column:1/-1}
 .region-section{display:block;padding-top:35px;margin-top:45px}.region-section h2{font-size:48px}.region-section p{font-size:14px}
 .life-list .row-number{width:34px;font-size:10px;padding-top:25px}.life-list td:nth-child(2){font-size:15px}.life-list td:last-child{font-size:11px;max-width:75px;padding-left:8px}.life-list .sci{font-size:11px}.life-list th{font-size:10px}.life-list td{padding-top:20px;padding-bottom:20px}
 .about-layout{display:block}.about-sign{font-size:clamp(70px,22vw,100px);margin-bottom:40px}.about-block{font-size:17px}
@@ -235,6 +255,8 @@ main>.wrap:not(.page-shell):not(#collection){padding-top:160px;padding-bottom:60
 #site-menu{padding:24px}.menu-top .eyebrow{max-width:150px;font-size:11px}.menu-close{font-size:11px;gap:12px}
 .overlay-nav{margin:7vh auto}.overlay-nav>a{grid-template-columns:30px 1fr;gap:12px;padding:25px 0}.overlay-nav>a>span:nth-child(2){font-size:64px}.nav-detail{display:none}.menu-bottom{font-size:10px}
 #lightbox{padding:94px 15px 120px}.lightbox-toolbar{top:22px}.lightbox-toolbar>.eyebrow{font-size:11px}.lightbox-close{font-size:11px;gap:12px}
+.lightbox-tools{gap:18px}.lightbox-info{font-size:11px;padding:0}
+#lightbox-details{inset:86px 15px 112px;width:auto;max-width:none;padding:24px}
 .lightbox-prev,.lightbox-next{top:auto;bottom:25px}.lightbox-prev{left:24px}.lightbox-next{right:24px}.lightbox-count{bottom:44px}
 #lightbox figcaption{font-size:12px}.review-item{flex-direction:column}
 }
