@@ -35,7 +35,11 @@ h2{font-size:clamp(40px,5vw,72px)}
 .site-nav a{padding:12px 0;position:relative}
 .site-nav a[aria-current=page]:after{content:"";position:absolute;height:1px;background:#e6ba82;bottom:3px;left:0;right:0}
 .header-actions{display:flex;align-items:center;gap:25px}
-.theme-toggle{width:44px;height:44px;font-size:25px;padding:0}
+.theme-toggle{width:44px;height:44px;padding:0;display:grid;place-items:center;flex:none}
+.theme-icon{width:22px;height:22px;display:block}
+.theme-icon-moon{display:none}
+:root[data-theme=light] .theme-icon-sun{display:none}
+:root[data-theme=light] .theme-icon-moon{display:block}
 .menu-toggle{display:flex;align-items:center;gap:18px;min-height:44px;padding:0}
 .menu-icon{width:23px;height:9px;border-top:1px solid;border-bottom:1px solid;display:block}
 body:not(:has(.hero)) .site-header{color:var(--text);border-color:var(--border)}
@@ -198,7 +202,7 @@ main>.wrap:not(.page-shell):not(#collection){padding-top:160px;padding-bottom:60
 :root{--pad:24px}
 .header-inner{height:82px;gap:12px}
 .brand-label{display:block;font-size:10px}.brand-label>span{font-size:8px}.brand{gap:9px}.brand-mark{width:37px;font-size:29px;padding-left:6px}.brand-mark span{font-size:23px}
-.site-nav{display:none}.header-actions{gap:16px}.menu-toggle{font-size:11px;gap:10px}.menu-icon{width:19px}.theme-toggle{width:28px;font-size:22px}
+.site-nav{display:none}.header-actions{gap:10px}.menu-toggle{font-size:11px;gap:10px}.menu-icon{width:19px}
 .hero{min-height:740px;max-height:none}
 .hero>img{object-position:57% center}
 .hero-top{top:110px;font-size:10px;align-items:start}.hero-top .eyebrow{font-size:10px}.hero-top>span:last-child{max-width:105px;text-align:right}
