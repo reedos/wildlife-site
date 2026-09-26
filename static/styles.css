@@ -108,7 +108,7 @@ main{min-height:70vh}
 .post-block>p a{border-bottom:1px solid var(--border)}
 .post-meta{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;border-bottom:1px solid var(--border);padding:18px 0;color:var(--text-dim)}
 .photo-place{letter-spacing:.04em}
-.post-meta:after{content:"FULL FRAME"}
+.post-meta:after{content:"VIEW FULL FRAME"}
 .photo-details{border-bottom:1px solid var(--border);margin-top:-13px}
 .photo-details summary{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:56px;cursor:pointer;font-size:13px;font-weight:600;list-style:none}
 .photo-details summary::-webkit-details-marker{display:none}
@@ -301,6 +301,9 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px soli
 @media(max-width:600px){.page-heading h1{font-size:clamp(48px,15vw,76px);overflow-wrap:anywhere}}
 .editorial-copy{max-width:760px;margin:0 auto 60px;font-size:18px;line-height:1.9}.editorial-copy:empty{display:none}.reviewed-species-note{max-width:900px;margin:0 auto 70px;padding:0 var(--pad);line-height:1.9}
 
-/* Standard browsing frames retain the complete edited photo inside the box. */
-.photo-frame{--frame-ratio:1.3333333333;--frame-aspect:4/3;display:block;width:min(100%,calc(var(--frame-height,88svh)*var(--frame-ratio)));height:auto;max-height:none;aspect-ratio:var(--frame-aspect);object-fit:contain;margin-inline:auto;background:var(--bg)}
+/* Browse previews fill standard frames; the viewer retains the original photograph. */
+.photo-frame{--frame-ratio:1.3333333333;--frame-aspect:4/3;display:block;width:min(100%,calc(var(--frame-height,88svh)*var(--frame-ratio)));height:auto;max-height:none;aspect-ratio:var(--frame-aspect);object-fit:cover;margin-inline:auto;background:var(--bg)}
 .photo-frame--portrait{--frame-ratio:.75;--frame-aspect:3/4}
+/* Preserve room around subjects that sit near an edge in these finished edits. */
+.photo-frame[src$="5c0bc538a364b045ef16-1600.jpg"],.photo-frame[src$="3dcafeae12e28a120abd-1600.jpg"]{object-position:left center}
+.photo-frame[src$="d166aa680bc9fb341981-1600.jpg"]{object-position:right center}
