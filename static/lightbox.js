@@ -39,27 +39,37 @@
   });
   menu.querySelector('.menu-close').addEventListener('click', function () { menu.close(); });
   var img = box.querySelector('img');
+  function sizePhoto() {
+    var bounds = img.getBoundingClientRect();
+    var ratio = Number(img.getAttribute('width')) / Number(img.getAttribute('height'));
+    if (box.open && bounds.width > 0 && bounds.height > 0 && ratio > 0) {
+      img.sizes = Math.ceil(Math.min(bounds.width, bounds.height * ratio)) + 'px';
+    }
+  }
   function show(index) {
     current = (index + links.length) % links.length;
     var link = links[current];
     var thumb = link.querySelector('img');
-    img.src = link.dataset.full;
-    img.srcset = thumb.srcset;
     img.alt = link.dataset.alt || thumb.alt;
     img.width = thumb.getAttribute('width');
     img.height = thumb.getAttribute('height');
-    box.querySelector('figcaption').textContent = img.alt;
+    box.querySelector('figcaption').textContent = link.dataset.caption || img.alt;
+    sizePhoto();
+    img.srcset = thumb.srcset;
+    img.src = link.dataset.full;
     box.querySelector('.lightbox-count').textContent = String(current + 1).padStart(2, '0') + ' / ' + String(links.length).padStart(2, '0');
     box.querySelector('.lightbox-prev').hidden = links.length < 2;
     box.querySelector('.lightbox-next').hidden = links.length < 2;
   }
   links.forEach(function (link, index) {
     link.addEventListener('click', function (event) {
-      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-      event.preventDefault(); show(index); open(box, link);
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || typeof box.showModal !== 'function') return;
+      event.preventDefault(); open(box, link); show(index);
       box.querySelector('.lightbox-close').focus();
     });
   });
+  if (typeof ResizeObserver === 'function') new ResizeObserver(sizePhoto).observe(img);
+  window.addEventListener('resize', sizePhoto);
   box.querySelector('.lightbox-close').addEventListener('click', function () { box.close(); });
   box.querySelector('.lightbox-prev').addEventListener('click', function () { show(current - 1); });
   box.querySelector('.lightbox-next').addEventListener('click', function () { show(current + 1); });
