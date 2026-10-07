@@ -45,3 +45,11 @@ The `.nojekyll` marker keeps the committed static files as the published output.
 The repository does not include a license granting reuse of the photographs. Contact
 the photographer through the [About page](https://reedos.dev/wildlife-site/about.html)
 for permission before reusing them. Bundled third-party assets retain their own terms.
+
+## Local link and media checks
+
+Run `python tools/check_site.py` before publishing. CI runs the same offline
+check on pushes and pull requests, covering HTML links, images, responsive image
+sources, video files/posters and CSS assets in this repository. External sites
+and separately deployed projects need their own live checks.
+Preserve `tools/`, `.github/` and this README when copying generated output.
